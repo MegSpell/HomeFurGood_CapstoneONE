@@ -1,0 +1,39 @@
+{# Use the base.html layout for consistent site structure #}
+{% extends "base.html" %}
+
+{# Set the browser tab title for this page #}
+{% block title %}Log In{% endblock %}
+
+{# Main content section for the page #}
+{% block content %}
+
+  <h1>Log In</h1>
+
+  {# Container that provides styling and spacing around the login form #}
+  <div class="auth-form-container">
+
+    {# Login form — handled by Flask-WTF form object #}
+    <form method="POST" class="auth-form">
+
+      {# Hidden fields and CSRF token required for Flask-WTF security #}
+      {{ form.hidden_tag() }}
+
+      {# Username field #}
+      <div class="form-group">
+        {{ form.username.label }}
+        {{ form.username(class_="form-control") }}
+      </div>
+
+      {# Password field #}
+      <div class="form-group">
+        {{ form.password.label }}
+        {{ form.password(class_="form-control") }}
+      </div>
+
+      {# Submit button to log in #}
+      <button type="submit" class="auth-button">Log In</button>
+
+    </form>
+  </div>
+
+{% endblock %}

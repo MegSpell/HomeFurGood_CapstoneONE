@@ -1,0 +1,61 @@
+{# Use base.html layout #}
+{% extends "base.html" %}
+
+{# Set page title #}
+{% block title %}My Favorites - Home Fur Good{% endblock %}
+
+{# Main content block #}
+{% block content %}
+
+  <h1>🐾 My Favorite Dogs 🐾</h1>
+
+  {# If user has any favorited dogs, show them in cards #}
+  {% if favorites %}
+
+    <div class="dog-container">
+
+      {# Loop through user's saved favorite dogs from DB #}
+      {% for dog in favorites %}
+
+        <div class="dog-card">
+
+          {# Dog image + name link to external Petfinder page #}
+          <a href="{{ dog.dog_url }}" target="_blank">
+
+            {# Show dog photo if saved, otherwise show default placeholder #}
+            {% if dog.dog_photo %}
+              <img src="{{ dog.dog_photo }}" alt="{{ dog.dog_name }}">
+            {% else %}
+              <img src="{{ url_for('static', filename='default-dog.png') }}" alt="Default dog">
+            {% endif %}
+
+            {# Dog name #}
+            <h3>{{ dog.dog_name }}</h3>
+
+          </a>
+
+          {# Heart button for unfavoriting the dog (AJAX) #}
+          <button 
+            class="heart-button filled"
+            data-dog-id="{{ dog.dog_id }}"
+            data-dog-name="{{ dog.dog_name }}"
+            data-dog-photo="{{ dog.dog_photo }}"
+            data-dog-url="{{ dog.dog_url }}"
+            data-favorited="true"
+            aria-label="Toggle Favorite"
+          >
+            &#10084;&#65039;
+          </button>
+
+        </div> {# End dog-card #}
+
+      {% endfor %} {# End loop over favorites #}
+
+    </div> {# End dog-container #}
+
+  {# If user has no favorites yet, show helpful message #}
+  {% else %}
+    <p>You haven't favorited any dogs yet. Start your search <a href="/search-form">here</a>!</p>
+  {% endif %}
+
+{% endblock %}

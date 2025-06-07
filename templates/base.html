@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Makes site responsive on mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Dynamic page title (child templates can override this block) -->
+  <title>{% block title %}Home Fur Good{% endblock %}</title>
+
+  <!-- Link to your main CSS stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+  <!-- =============================
+       NAVBAR
+       ============================= -->
+  <header>
+    <nav class="navbar">
+
+      <!-- Site Logo / Home Link -->
+      <div class="nav-left">
+        <a href="/" class="nav-logo">🐶 Home Fur Good</a>
+      </div>
+
+      <!-- Hamburger icon (visible on mobile) -->
+      <button class="hamburger" id="hamburger">&#9776;</button>
+
+      <!-- Navigation links -->
+      <div class="nav-right" id="nav-links">
+
+        <!-- If user is logged in -->
+        {% if g.user.is_authenticated %}
+          <!-- Show username -->
+          <span class="nav-user">Welcome, {{ g.user.username }}!</span>
+
+          <!-- Show navigation links -->
+          <a href="/search-form" title="Find a Dog" class="nav-icon">🔍</a>
+          <a href="/favorites">❤️ My Favorites</a>
+          <a href="/logout">Log Out</a>
+
+        <!-- If user is NOT logged in -->
+        {% else %}
+          <a href="/signup">Sign Up</a>
+          <a href="/login">Log In</a>
+        {% endif %}
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- =============================
+       FLASH MESSAGES
+       ============================= -->
+  <!-- Display any flash messages (for example: success, error) -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for category, message in messages %}
+          <div class="flash flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- =============================
+       MAIN PAGE CONTENT
+       ============================= -->
+  <!-- Each individual page will fill in this content block -->
+  <main class="content-wrapper">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- =============================
+       FOOTER
+       ============================= -->
+  <footer class="site-footer">
+    <p>&copy; 2025 Home Fur Good | Built by <a href="https://github.com/megspell" target="_blank">Meghan Spellman</a></p>
+  </footer>
+
+  <!-- Load your main JavaScript file -->
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+{# Use base.html layout #}
+{% extends "base.html" %}
+
+{# Set page title #}
+{% block title %}Search Results - Home Fur Good{% endblock %}
+
+{# Main content block #}
+{% block content %}
+
+  <h1>🐾 Are any of these your FURever pup?! 🐾</h1>
+
+  {# Small instructional note below heading #}
+  <small class="heart-note">(click the heart to save pup to your favorites!)</small>
+
+  {# Check if the dogs list is not empty #}
+  {% if dogs %}
+
+    {# Container for dog cards #}
+    <div class="dog-container">
+
+      {# Loop through dogs returned from the Petfinder API #}
+      {% for dog in dogs %}
+
+        {# Single dog card #}
+        <div class="dog-card">
+
+          {# Dog image, name, and breed/age link to external Petfinder page #}
+          <a href="{{ dog.url }}" target="_blank">
+
+            {# Show dog photo if available, otherwise show default placeholder #}
+            {% if dog.photos %}
+              <img src="{{ dog.photos[0].medium }}" alt="{{ dog.name }}">
+            {% else %}
+              <img src="{{ url_for('static', filename='default-dog.png') }}" alt="Default dog">
+            {% endif %}
+
+            {# Dog name #}
+            <h3>{{ dog.name }}</h3>
+
+            {# Dog primary breed and age #}
+            <p>{{ dog.breeds.primary }} | {{ dog.age }}</p>
+
+          </a>
+
+          {# If user is logged in, show heart button to favorite/unfavorite this dog #}
+          {% if g.user.is_authenticated %}
+
+            {# Check if this dog is already favorited by current user #}
+            {% set is_favorited = dog.id|string in favorited_ids %}
+
+            {# Heart button with data attributes used by main.js for AJAX calls #}
+            <button 
+              class="heart-button {% if is_favorited %}filled{% endif %}" 
+              data-dog-id="{{ dog.id }}"
+              data-dog-name="{{ dog.name }}"
+              data-dog-photo="{{ dog.photos[0].medium if dog.photos else '' }}"
+              data-dog-url="{{ dog.url }}"
+              aria-label="Toggle Favorite"
+            >
+
+              {# Show red heart if favorited, otherwise show empty heart #}
+              {% if is_favorited %}&#10084;&#65039;{% else %}🤍{% endif %}
+
+            </button>
+          {% endif %}
+
+        </div> {# End of dog-card #}
+
+      {% endfor %} {# End of dog loop #}
+
+    </div> {# End of dog-container #}
+
+  {# If no dogs found, show message #}
+  {% else %}
+    <p>No dogs found for that search. Try another location or adjust your filters.</p>
+  {% endif %}
+
+{% endblock %}
+

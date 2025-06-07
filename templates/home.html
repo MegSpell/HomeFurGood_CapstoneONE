@@ -1,0 +1,69 @@
+{# Use base.html layout #}
+{% extends "base.html" %}
+
+{# Set the title of the page for the browser tab #}
+{% block title %}Home - Home Fur Good{% endblock %}
+
+{# Main content block that will display on the page #}
+{% block content %}
+
+  <h1>🐾 Home Fur Good 🐾</h1>
+
+  {# Intro paragraph explaining how the site works (homepage "About") #}
+  <p class="home-intro">
+    Welcome to <strong>Home Fur Good</strong> — a web app developed to help you find your soul pup-mate! 🐾  
+    Use the search function to find adoptable dogs in your area, click the heart ❤️ to save favorites to revisit later, and click on a pup's photo to view full details on Petfinder. Let's help save a pup in need by finding your new furry best friend!
+  </p>
+  
+  {# Button to go to the search form #}
+  <a href="/search-form" class="find-dog-button">🐶 Find a Pup</a>
+
+  {# Section for spotlight dogs (the 3 most recent/featured dogs) #}
+  <h2>Available Spotlight Dogs:</h2>
+
+  <div class="dog-container">
+    {# Loop through each dog in the "dogs" variable passed from Flask #}
+    {% for dog in dogs %}
+      <div class="dog-card">
+
+        {# Dog card links to the dog's Petfinder profile #}
+        <a href="{{ dog.url }}" target="_blank">
+          
+          {# If the dog has a photo, show it. Otherwise, show the default image #}
+          {% if dog.photos %}
+            <img src="{{ dog.photos[0].medium }}" alt="{{ dog.name }}">
+          {% else %}
+            <img src="{{ url_for('static', filename='default-dog.png') }}" alt="Default dog">
+          {% endif %}
+
+          {# Dog name and breed/age text inside the link #}
+          <h3>{{ dog.name }}</h3>
+          <p>{{ dog.breeds.primary }} | {{ dog.age }}</p>
+        </a>
+
+        {# Only show the favorite heart if the user is logged in #}
+        {% if g.user.is_authenticated %}
+
+          {# Check if this dog is already in the user's favorites #}
+          {% set is_favorited = dog.id|string in favorited_ids %}
+
+          {# Heart button (filled if already favorited) #}
+          <button 
+            class="heart-button {% if is_favorited %}filled{% endif %}" 
+            data-dog-id="{{ dog.id }}"
+            data-dog-name="{{ dog.name }}"
+            data-dog-photo="{{ dog.photos[0].medium if dog.photos else '' }}"
+            data-dog-url="{{ dog.url }}"
+            aria-label="Toggle Favorite"
+          >
+            {# Display red heart if favorited, empty heart if not #}
+            {% if is_favorited %}&#10084;&#65039;{% else %}🤍{% endif %}
+          </button>
+
+        {% endif %}
+        
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

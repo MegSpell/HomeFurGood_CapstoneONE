@@ -1,0 +1,45 @@
+{# Use the base.html layout for consistent page structure #}
+{% extends "base.html" %}
+
+{# Set the page title for browser tab #}
+{% block title %}Sign Up{% endblock %}
+
+{# Main page content #}
+{% block content %}
+
+  <h1>Sign Up</h1>
+
+  {# Container for signup form with consistent styling #}
+  <div class="auth-form-container">
+
+    {# Signup form — uses Flask-WTF form object #}
+    <form method="POST" class="auth-form">
+
+      {# CSRF token and hidden fields required for Flask-WTF security #}
+      {{ form.hidden_tag() }}
+
+      {# Username field #}
+      <div class="form-group">
+        {{ form.username.label }}
+        {{ form.username(class_="form-control") }}
+      </div>
+
+      {# Email field #}
+      <div class="form-group">
+        {{ form.email.label }}
+        {{ form.email(class_="form-control") }}
+      </div>
+
+      {# Password field #}
+      <div class="form-group">
+        {{ form.password.label }}
+        {{ form.password(class_="form-control") }}
+      </div>
+
+      {# Submit button #}
+      <button type="submit" class="auth-button">Sign Up</button>
+
+    </form>
+  </div>
+
+{% endblock %}
