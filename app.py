@@ -59,17 +59,6 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 
-# ===========================
-#    TEMPORARY UTILITY ROUTES
-# ===========================
-
-@app.route("/init-db")
-def init_db():
-    """Temporary route to initialize database tables."""
-    db.create_all()
-    return "Database initialized!"
-
-
 
 # ===========================
 #       AUTH ROUTES
