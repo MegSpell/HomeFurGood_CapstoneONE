@@ -211,3 +211,14 @@ def search_form():
     token = get_token()
     breeds = get_breeds(token)
     return render_template("search_form.html", breeds=breeds)
+
+
+# ===========================
+#    TEMPORARY UTILITY ROUTES
+# ===========================
+
+@app.route("/init-db")
+def init_db():
+    """Temporary route to initialize database tables."""
+    db.create_all()
+    return "Database initialized!"
