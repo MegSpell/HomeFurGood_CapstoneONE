@@ -214,7 +214,7 @@ def search_form():
 
 
 # ===========================
-#    TEMPORARY UTILITY ROUTES
+#    TEMPORARY UTILITY ROUTES  <------ only needed to init once to start app
 # ===========================
 
 # @app.route("/init-db")
