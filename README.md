@@ -1,6 +1,6 @@
 # Home Fur Good
 
-**Live URL:** _deployed URL goes here (example: https://homefurgood.onrender.com)_
+**Live URL:** https://home-fur-good.onrender.com/
 
 ## Description
 
@@ -12,9 +12,9 @@ The goal of this app is to make it easy and fun for users to find their perfect 
 
 - User registration and login (with secure password hashing)
 - Spotlight section highlighting adoptable dogs on the homepage
-- Detailed search form with filters (breed, size, age, location, etc.)
+- Detailed search form with filters (breed, size, age, location, temperament, etc.)
 - Ability for logged-in users to save favorite dogs
-- Favorites page to view and manage saved dogs
+- Favorites page to view and manage saved dogs, favorite/unfavorite
 - Responsive and mobile-friendly design
 
 ## Tests
@@ -36,14 +36,14 @@ python -m unittest discover -s tests
 ## Standard User Flow
 
 1. User lands on homepage and sees spotlight dogs
-2. User can use page without sign up or logging in by clicking **Find a Pup** or the search icon in the nav bar to bring them to the search form to look for adoptable dogs by criteria
+2. User can use pageas guest without sign up or logging in by clicking **Find a Pup** or the search icon in the nav bar to bring them to the search form to look for adoptable dogs by criteria
 3. User can click on the dog photo to bring them to the Petfinder official page to see all the dog's info
-4. User can sign up for a new account or log in
+4. User can sign up for a new account and then log in
 5. After logging in, user can search and NOW favorite and unfavorite dogs which will be saved in their favorite dog's list
 6. User can view saved dogs on the **My Favorites** page
 7. User can log out
 
-There is also a seed file (optional) to run to generate 2 users already signed up with a favorite dog in their list so one can easily see the function of the page in use.
+There is also a seed file (optional) to run to generate 2 users already signed up with a favorite dog in their list so one can easily see the function of the page in use by logging in as one of those users.
 
 ## API Usage
 
@@ -66,6 +66,7 @@ There is also a seed file (optional) to run to generate 2 users already signed u
 - A stretch goal for this project would be adding an admin dashboard to view user data and manage featured dogs.
 - Another stretch goal is to add a weekly newsletter with more spotlighted dogs to generate interest and searching. 
 - Most interested in being able to highlight at risk dogs in kill shelters, still figuring out a way to accomplish this! 
+-Would like to add more styling and backgrounds when time allows and maybe a real home page with options to sign up, log in or continue as guest.
 
 
 
