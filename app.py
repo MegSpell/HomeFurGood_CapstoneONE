@@ -217,8 +217,8 @@ def search_form():
 #    TEMPORARY UTILITY ROUTES  <------ only needed to init once to start app
 # ===========================
 
-# @app.route("/init-db")
-# def init_db():
-#     """Temporary route to initialize database tables."""
-#     db.create_all()
-#     return "Database initialized!"
+@app.route("/init-db")
+def init_db():
+    """Temporary route to initialize database tables."""
+    db.create_all()
+    return "Database initialized!"
