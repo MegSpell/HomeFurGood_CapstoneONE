@@ -12,7 +12,7 @@
   {# Intro paragraph explaining how the site works (homepage "About") #}
   <p class="home-intro">
     Welcome to <strong>Home Fur Good</strong> — a web app developed to help you find your soul pup-mate! 🐾  
-    Use the search function to find adoptable dogs in your area, click the heart ❤️ to save favorites to revisit later, and click on a pup's photo to view full details on Petfinder. Let's help save a pup in need by finding your new furry best friend!
+    Use the search function to find adoptable dogs in your area, sign up and log in to save favorites to revisit later by clicking the &#10084;&#65039;, and you can also click on a pup's photo to view full details on Petfinder. Let's help save a pup in need by finding you your new furry best friend!
   </p>
   
   {# Button to go to the search form #}
@@ -21,10 +21,15 @@
   {# Section for spotlight dogs (the 3 most recent/featured dogs) #}
   <h2>Available Spotlight Dogs:</h2>
 
+    {# Small instructional note below heading only if logged in#}
+    {% if g.user.is_authenticated %}
+    <small class="heart-note">(click the heart to save pup to your favorites!)</small>
+  {% endif %}
+
   <div class="dog-container">
     {# Loop through each dog in the "dogs" variable passed from Flask #}
     {% for dog in dogs %}
-      <div class="dog-card">
+      <div class="dog-card spotlight">
 
         {# Dog card links to the dog's Petfinder profile #}
         <a href="{{ dog.url }}" target="_blank">

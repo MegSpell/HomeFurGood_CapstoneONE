@@ -1,18 +1,18 @@
- /* ===========================
+/* ===========================
        GLOBAL RESETS & LAYOUTS
  =========================== */
 
- html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: Arial, sans-serif;
-  background-color: #fef9f4;
+  font-family: 'Poppins', Arial, sans-serif;
+  background-color: #b1a596;
   display: flex;
   flex-direction: column;
 }
 
-/* Main content pushes down below fixed navbar */
 main {
   flex: 1;
   padding-top: 80px;
@@ -26,13 +26,12 @@ main {
   text-align: center;
 }
 
-
- /* ===========================
+/* ===========================
        NAVIGATION BAR
  =========================== */
 
- .navbar {
-  background-color: #f6e6da;
+.navbar {
+  background-color: #7a8877;
   position: fixed;
   top: 0;
   left: 0;
@@ -47,7 +46,8 @@ main {
   flex-wrap: wrap;
 }
 
-.nav-left, .nav-right {
+.nav-left,
+.nav-right {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -56,7 +56,7 @@ main {
 .navbar a {
   text-decoration: none;
   color: #333;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 0.95rem;
   transition: color 0.2s;
 }
@@ -76,29 +76,33 @@ main {
 }
 
 .nav-user {
-  background-color: #f0ebe2;
-  border: 1px solid #76b947;
+  background-color: #d4cbbf;
+  border: 2px solid #76b947;
   padding: 6px 10px;
   border-radius: 6px;
   font-style: italic;
 }
 
-
- /* ===========================
+/* ===========================
        HEADINGS
  =========================== */
 
- h1 {
+h1 {
+  font-weight: 700;
   color: #3e3e3e;
   margin-bottom: 10px;
 }
 
 h2 {
+  font-weight: 600;
   color: #5b5b5b;
 }
 
+h3 {
+  font-weight: 600;
+}
 .home-intro {
-  max-width: 600px;  /* limit line length */
+  max-width: 600px;
   margin: 0 auto 30px;
   font-size: 1.1rem;
   line-height: 1.6;
@@ -106,12 +110,23 @@ h2 {
   text-align: center;
 }
 
+.search-h1 {
+  margin-bottom: 30px;
+}
 
- /* ===========================
+p {
+  font-weight: 400;  /* Clean and readable for body text */
+  line-height: 1.6;
+  color: #444;
+}
+
+
+
+/* ===========================
        DOG CARDS
  =========================== */
 
- .dog-container {
+.dog-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -121,9 +136,9 @@ h2 {
 .dog-card {
   position: relative;
   width: 250px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 12px;
-  background-color: #fff;
+  background-color: #7a8877;
   overflow: hidden;
   padding: 10px;
   display: flex;
@@ -134,27 +149,40 @@ h2 {
 
 .dog-card:hover {
   transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px white;
+  transition: box-shadow 0.3s ease;
 }
 
 .dog-card img {
-  width: 100%;
+  width: 200px;
   height: 200px;
   object-fit: cover;
   border-radius: 10px;
 }
 
 .dog-card a {
-  color: #000;              /* Black text */
-  text-decoration: none;    /* Remove underline */
+  color: #000;
+  text-decoration: none;
+}
+  
+
+/* Spotlight dog style */
+.dog-card.spotlight {
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 12px 4px #d8c86d;
+  transition: box-shadow 0.3s ease;
+  margin-top: 25px;
 }
 
+.dog-card.spotlight:hover {
+  box-shadow: 0 0 24px 8px #ffd700;
+}
 
- /* ===========================
+/* ===========================
        HEART FAVORITE BUTTON
  =========================== */
 
- .heart-button {
+.heart-button {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -172,58 +200,25 @@ h2 {
 }
 
 
- /* ===========================
-       FADE-OUT ANIMATION
- =========================== */
-
- @keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-}
-
-.dog-card.fade-out {
-  animation: fadeOut 0.4s ease forwards;
-}
+/* ===========================
+   SEARCH FORM
+=========================== */
 
 
- /* ===========================
-       SEARCH FORM
- =========================== */
-
- .search-form-container {
+.search-form-container {
   max-width: 600px;
   margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border: 2px solid #e0d4c0;
+  padding: 25px 30px;
+  background-color: #d4cbbf;
+  border: 2px solid #7a8877;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-
- /* ===========================
-       FORM INPUTS & CHECKBOXES
- =========================== */
-
- .search-form input,
-.search-form select {
-  width: 100%;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-  
 .search-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .form-group {
@@ -234,45 +229,81 @@ h2 {
 
 .form-group label {
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   color: #444;
 }
 
 small {
-  color: gray;
+  color: rgb(90, 89, 89);
 }
+
+
+.search-form input,
+.search-form select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: #f7f1f1;
+  border: 2px solid #7a8877;
+  /* text-align: center; */
+}
+
+/* ===========================
+   CHECKBOXES 
+=========================== */
 
 .checkboxes {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 12px;
+  margin-top: 15px;
 }
 
 .checkboxes label {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-right: 15px;
-  margin-bottom: 8px;
-  margin-top: 15px;
-  white-space: nowrap;
+  display: inline-block;
+  font-size: 1rem;
+  color: #333;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  width: 100%;              
+  box-sizing: border-box;   
+  border: 2px solid #7a8877;  
 }
 
- /* ===========================
-       BUTTONS 
+.checkboxes label:hover {
+  background-color: #f0f0f0;
+}
+
+.checkboxes input[type="checkbox"] {
+  margin-right: 8px;       
+  vertical-align: middle;    
+  transform: scale(1.2);     
+}
+
+
+/* ===========================
+       BUTTONS
  =========================== */
 
- .search-form button,
+ .auth-button,
+.search-form button,
 .find-dog-button {
   padding: 10px 20px;
   background-color: #76b947;
   color: white;
   border-radius: 6px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
   text-decoration: none;
-  border: none;
+  border: 2px solid #7a8877;
 }
 
 .search-form button:hover,
@@ -280,53 +311,29 @@ small {
   background-color: #5a9336;
 }
 
-
- /* ===========================
+/* ===========================
       FOOTER
  =========================== */
 
- .site-footer {
-  background-color: #f5f5f5;
+.site-footer {
+  background-color: #7a8877;
   padding: 20px;
   text-align: center;
   font-size: 0.9rem;
-  border-top: 1px solid #ddd;
+  border-top: 2px solid #ddd;
+  margin-top: 25px;
 }
 
-
- /* ===========================
-      AUTHENTICATION FORMS
- =========================== */
-
- .auth-form-container {
-  max-width: 400px;
-  margin: 30px auto;
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 12px;
-  border: 2px solid #e0d4c0;
+.site-footer a {
+  text-decoration: none;
+  color: black;
 }
 
-.auth-form label {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.auth-button {
-  background-color: #76b947;
-  padding: 12px;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-
- /* ===========================
+/* ===========================
       FLASH MESSAGES
  =========================== */
 
- .flash-messages {
+.flash-messages {
   position: fixed;
   top: 70px;
   left: 50%;
@@ -341,27 +348,81 @@ small {
   border-radius: 8px;
   text-align: center;
   animation: fadeOut 0.5s ease-in-out 4s forwards;
+
+  border: 2px solid #fff; /* White border to help it stand out */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
 }
 
-.flash-success { background-color: rgba(118, 185, 71, 0.2); }
-.flash-danger { background-color: rgba(204, 0, 0, 0.2); }
-.flash-info   { background-color: rgba(0, 116, 204, 0.2); }
+.flash-success {
+  background-color: rgba(118, 185, 71, 0.2);
+}
+.flash-danger {
+  background-color: rgba(204, 0, 0, 0.2);
+}
+.flash-info {
+  background-color: rgba(0, 116, 204, 0.2);
+}
 
+/* ===========================
+      AUTHENTICATION FORMS
+ =========================== */
 
- /* ===========================
+.auth-form-container {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 12px;
+  border: 2px solid #7a8877;
+}
+
+.auth-form {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-control {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #b1a596;
+  width: 100%;
+}
+
+.auth-button {
+  width: 200px;
+  background-color: #76b947;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease-in-out;
+  margin: 0 auto; /* THIS centers it horizontally */
+  display: block;
+}
+
+.auth-button:hover {
+  background-color: #5a9336;
+}
+
+/* ===========================
       HAMBURGER
  =========================== */
 
- .hamburger {
+.hamburger {
   display: none;
 }
 
-
- /* ===========================
+/* ===========================
       MOBILE RESPONSIVE STYLES
  =========================== */
 
- @media (max-width: 768px) {
+@media (max-width: 768px) {
   .hamburger {
     display: block;
   }

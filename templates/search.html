@@ -7,10 +7,12 @@
 {# Main content block #}
 {% block content %}
 
-  <h1>🐾 Are any of these your FURever pup?! 🐾</h1>
+  <h1 class="search-h1">🐾 Are any of these your FURever pup?! 🐾</h1>
 
-  {# Small instructional note below heading #}
+  {# Small instructional note below heading only if logged in#}
+  {% if g.user.is_authenticated %}
   <small class="heart-note">(click the heart to save pup to your favorites!)</small>
+{% endif %}
 
   {# Check if the dogs list is not empty #}
   {% if dogs %}
