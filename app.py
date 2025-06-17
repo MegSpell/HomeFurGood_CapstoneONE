@@ -7,6 +7,8 @@ from forms import SignUpForm, LoginForm
 import requests
 from petfinder_api import get_token, get_dogs
 
+from sqlalchemy.exc import IntegrityError  #####<---- deal with errors on sign up
+
 # ===========================
 #        CONFIG CLASS
 # ===========================
@@ -66,19 +68,49 @@ if __name__ == "__main__":
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
+    # Create an instance of the signup form
     form = SignUpForm()
-    if form.validate_on_submit():  # If POST and form is valid
-        user = User.register(
-            username=form.username.data,
-            email=form.email.data,
-            password=form.password.data
-        )
-        db.session.add(user)
-        db.session.commit()
-        login_user(user)  # Log the user in automatically
-        flash(f"Account created! Welcome, {user.username}!", "success")
-        return redirect("/")
-    return render_template("auth/signup.html", form=form)  # Show form if GET or validation fails
+
+    # Check if this is a POST request and the form is valid
+    if form.validate_on_submit():
+        try:
+            # Register a new user with hashed password
+            user = User.register(
+                username=form.username.data,
+                email=form.email.data,
+                password=form.password.data
+            )
+
+            # Add user to the session and commit to the database
+            db.session.add(user)
+            db.session.commit()
+
+            # Automatically log the user in
+            login_user(user)
+
+            # Flash a success message and redirect to homepage
+            flash(f"Account created! Welcome, {user.username}!", "success")
+            return redirect("/")
+
+        # Handle case where username or email already exists (violates uniqueness constraint)
+        except IntegrityError:
+            db.session.rollback()  # Roll back the session to prevent it from breaking
+            flash("Username or email already exists. Please choose another.", "danger")
+
+        # Catch any unexpected errors that might occur
+        except Exception:
+            db.session.rollback()
+            flash("An unexpected error occurred. Please try again.", "danger")
+
+    else:
+        # If form validation fails (e.g., short password, missing fields), flash errors
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"{field.capitalize()}: {error}", "danger")
+
+    # If GET request or errors occurred, re-render the signup page with form
+    return render_template("auth/signup.html", form=form)
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

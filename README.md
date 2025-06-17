@@ -63,11 +63,11 @@ There is also a seed file (optional) to run to generate 2 users already signed u
 
 ## Notes
 
-- A stretch goal for this project would be adding an admin dashboard to view user data and manage featured dogs.
+- A stretch goal for this project would be adding an admin dashboard to view user data, delete accounts, and manage featured dogs.
 - Another stretch goal is to add a weekly newsletter with more spotlighted dogs to generate interest and searching. 
 - Most interested in being able to highlight at risk dogs in kill shelters, still figuring out a way to accomplish this! 
 -Would like to add more styling and backgrounds when time allows and maybe a real home page with options to sign up, log in or continue as guest.
-
+-Would like to handle stronger password validation (e.g., requiring special characters or blocking passwords that include usernames) to be implemented for security. For demo purposes, form validation has been kept minimal to streamline user experience.
 
 
 © 2025 Home Fur Good — Built by Meghan Spellman 🐾
